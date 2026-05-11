@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <title>Darius Sattari</title>
+    <meta
+      name="description"
+      content="Projects, writing, AI discussion, and fitness/nutrition resources."
+    />
+
+    <meta property="og:title" content="Darius Sattari" />
+    <meta
+      property="og:description"
+      content="Projects, writing, AI discussion, and fitness/nutrition resources."
+    />
+    <meta property="og:type" content="website" />
+
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+
+    <script src="site.config.js"></script>
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="topbar" id="top">
+      <div class="container topbar__inner">
+        <a class="brand" href="#top" aria-label="Home">
+          <span class="brand__mark" aria-hidden="true">DS</span>
+          <span class="brand__text">Darius Sattari</span>
+        </a>
+
+        <nav class="nav" aria-label="Primary">
+          <a class="nav__link" href="#projects">Projects</a>
+          <a class="nav__link" href="#ai">AI</a>
+          <a class="nav__link" href="#writing">Writing</a>
+          <a class="nav__link" href="#fitness">Fitness</a>
+          <a class="nav__link" href="#contact">Contact</a>
+        </nav>
+
+        <button class="iconbtn" id="themeToggle" type="button">
+          <span class="iconbtn__icon" aria-hidden="true" id="themeIcon">◐</span>
+          <span class="sr-only" id="themeToggleLabel">Toggle theme</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <div class="container hero__inner">
+          <div class="hero__copy">
+            <p class="eyebrow" id="heroEyebrow">Engineer • Builder • Lifelong learner</p>
+            <h1 class="hero__title" id="heroTitle">Hi, I’m <span class="accent">Darius</span>.</h1>
+            <p class="hero__subtitle" id="heroSubtitle">
+              I build practical software, explore AI systems, and share what I learn.
+            </p>
+
+            <div class="hero__cta">
+              <a class="btn btn--primary" href="#projects">Explore projects</a>
+              <a class="btn btn--ghost" href="#ai">AI discussion</a>
+              <a class="btn btn--ghost" href="assets/files/resume.pdf" target="_blank" rel="noreferrer">
+                Resume (PDF)
+              </a>
+            </div>
+
+            <ul class="chips" id="socialChips" aria-label="Social links"></ul>
+          </div>
+
+          <div class="hero__media" aria-hidden="true">
+            <div class="hero__card">
+              <img
+                class="hero__image"
+                src="assets/images/hero.png"
+                alt=""
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="projects">
+        <div class="container">
+          <div class="section__header">
+            <h2>Technical Projects</h2>
+            <p class="muted">
+              Pulled live from GitHub. Filter by subject area, then click into a repo.
+            </p>
+          </div>
+
+          <div class="toolbar" role="region" aria-label="Project filters">
+            <div class="toolbar__row">
+              <label class="field">
+                <span class="field__label">Subject</span>
+                <select id="subjectFilter" class="field__control"></select>
+              </label>
+
+              <label class="field">
+                <span class="field__label">Search</span>
+                <input
+                  id="projectSearch"
+                  class="field__control"
+                  type="search"
+                  placeholder="Name, language, description…"
+                  autocomplete="off"
+                />
+              </label>
+
+              <label class="field field--compact">
+                <span class="field__label">Show forks</span>
+                <input id="showForks" type="checkbox" />
+              </label>
+            </div>
+
+            <div class="toolbar__meta">
+              <span class="muted" id="projectMeta">Loading projects…</span>
+              <a class="link" id="githubProfileLink" href="#" target="_blank" rel="noreferrer">
+                View GitHub profile
+              </a>
+            </div>
+          </div>
+
+          <div class="grid" id="projectGrid" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="section" id="ai">
+        <div class="container">
+          <div class="section__header">
+            <h2>AI Discussion Space</h2>
+            <p class="muted">
+              Notes, experiments, and longer-form thinking. Posts are Markdown files in this repo.
+            </p>
+          </div>
+
+          <div class="split">
+            <div class="panel">
+              <h3 class="panel__title">AI Notes</h3>
+              <ul class="list" id="aiPostList" aria-label="AI notes"></ul>
+              <p class="muted small" id="aiDiscussionsHint"></p>
+            </div>
+
+            <div class="panel">
+              <h3 class="panel__title">Publications / Media</h3>
+              <ul class="list" id="mediaList" aria-label="Publications and media"></ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="writing">
+        <div class="container">
+          <div class="section__header">
+            <h2>Writing</h2>
+            <p class="muted">Essays, drafts, and anything else I decide to ship.</p>
+          </div>
+          <div class="panel">
+            <ul class="list" id="writingList" aria-label="Writing posts"></ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="fitness">
+        <div class="container">
+          <div class="section__header">
+            <h2>Fitness & Nutrition</h2>
+            <p class="muted">
+              Workout plans, meal-prep resources, and a simple meal planner that generates a grocery list.
+            </p>
+          </div>
+
+          <div class="split">
+            <div class="panel">
+              <h3 class="panel__title">Resources</h3>
+              <ul class="list" id="fitnessList" aria-label="Fitness and nutrition resources"></ul>
+            </div>
+
+            <div class="panel">
+              <h3 class="panel__title">Meal Planner</h3>
+              <p class="muted small">
+                Pick meals, then copy the grocery list. Edit recipes in
+                <code>content/fitness/recipes.json</code>.
+              </p>
+
+              <div class="planner">
+                <div class="planner__row">
+                  <label class="field">
+                    <span class="field__label">Meal</span>
+                    <select id="recipePicker" class="field__control"></select>
+                  </label>
+                  <button class="btn btn--primary" id="addMeal" type="button">Add</button>
+                  <button class="btn btn--ghost" id="clearMeals" type="button">Clear</button>
+                </div>
+
+                <div class="planner__row planner__row--stack">
+                  <div>
+                    <h4 class="minihead">Selected meals</h4>
+                    <ul class="mini" id="selectedMeals"></ul>
+                  </div>
+                  <div>
+                    <h4 class="minihead">Grocery list</h4>
+                    <textarea
+                      id="groceryList"
+                      class="textarea"
+                      rows="10"
+                      spellcheck="false"
+                      readonly
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="container">
+          <div class="section__header">
+            <h2>Contact</h2>
+            <p class="muted">Best way to reach me: email, or DM on socials.</p>
+          </div>
+
+          <div class="contact">
+            <div class="panel">
+              <h3 class="panel__title">Links</h3>
+              <ul class="list" id="contactLinks"></ul>
+            </div>
+            <div class="panel">
+              <h3 class="panel__title">Quick note</h3>
+              <p class="muted">
+                This site is intentionally simple: plain HTML/CSS/JS so GitHub Pages can host it
+                with zero build steps.
+              </p>
+              <p class="muted small" id="lastUpdated"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <span class="muted small">© <span id="year"></span> <span id="footerName"></span></span>
+        <a class="link small" href="#top">Back to top</a>
+      </div>
+    </footer>
+
+    <dialog class="modal" id="modal">
+      <form method="dialog" class="modal__frame">
+        <div class="modal__top">
+          <h3 class="modal__title" id="modalTitle">Post</h3>
+          <button class="iconbtn" type="submit" aria-label="Close">
+            <span aria-hidden="true">✕</span>
+          </button>
+        </div>
+        <div class="modal__body" id="modalBody"></div>
+      </form>
+    </dialog>
+  </body>
+</html>
+

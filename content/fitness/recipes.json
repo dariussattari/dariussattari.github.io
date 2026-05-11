@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "id": "chicken-rice-bowl",
+      "name": "Chicken + Rice Bowl",
+      "ingredients": [
+        { "name": "Chicken breast", "qty": 2, "unit": "lb" },
+        { "name": "Rice", "qty": 2, "unit": "cup" },
+        { "name": "Broccoli", "qty": 2, "unit": "head" },
+        { "name": "Olive oil", "qty": 2, "unit": "tbsp" }
+      ]
+    },
+    {
+      "id": "overnight-oats",
+      "name": "Overnight Oats",
+      "ingredients": [
+        { "name": "Rolled oats", "qty": 3, "unit": "cup" },
+        { "name": "Greek yogurt", "qty": 2, "unit": "cup" },
+        { "name": "Milk", "qty": 3, "unit": "cup" },
+        { "name": "Frozen berries", "qty": 1, "unit": "bag" }
+      ]
+    }
+  ]
+}
+

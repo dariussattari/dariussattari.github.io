@@ -1,0 +1,15 @@
+{
+  "items": [
+    {
+      "title": "Welcome: what I’m exploring in AI",
+      "date": "May 11, 2026",
+      "path": "content/ai/welcome.md"
+    },
+    {
+      "title": "How I think about building with LLMs",
+      "date": "May 11, 2026",
+      "path": "content/ai/building-with-llms.md"
+    }
+  ]
+}
+

@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "label": "Resume (PDF)",
+      "href": "assets/files/resume.pdf",
+      "meta": ""
+    },
+    {
+      "label": "Policy memo (PDF)",
+      "href": "assets/files/policy-memo.pdf",
+      "meta": ""
+    },
+    {
+      "label": "Podcast (add link)",
+      "href": "#contact",
+      "meta": "Edit content/media.json"
+    }
+  ]
+}
+
