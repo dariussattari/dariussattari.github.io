@@ -1,5 +1,7 @@
 # dariussattari.github.io
 
+https://dariussattari.github.io
+
 This repo is a **GitHub Pages** personal site (plain HTML/CSS/JS).
 
 ## Deploy (GitHub Pages)
