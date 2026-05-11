@@ -15,6 +15,7 @@
       property="og:description"
       content="Projects, writing, AI discussion, and fitness/nutrition resources."
     />
+    <meta property="og:image" content="assets/images/profile.jpg" />
     <meta property="og:type" content="website" />
 
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
@@ -52,6 +53,15 @@
       <section class="hero">
         <div class="container hero__inner">
           <div class="hero__copy">
+            <img
+              class="avatar"
+              src="assets/images/profile-256.jpg"
+              alt="Portrait of Darius Sattari"
+              width="84"
+              height="84"
+              loading="eager"
+              decoding="async"
+            />
             <p class="eyebrow" id="heroEyebrow">Engineer • Builder • Lifelong learner</p>
             <h1 class="hero__title" id="heroTitle">Hi, I’m <span class="accent">Darius</span>.</h1>
             <p class="hero__subtitle" id="heroSubtitle">
@@ -67,17 +77,6 @@
             </div>
 
             <ul class="chips" id="socialChips" aria-label="Social links"></ul>
-          </div>
-
-          <div class="hero__media" aria-hidden="true">
-            <div class="hero__card">
-              <img
-                class="hero__image"
-                src="assets/images/hero.png"
-                alt=""
-                loading="lazy"
-              />
-            </div>
           </div>
         </div>
       </section>
@@ -109,10 +108,6 @@
                 />
               </label>
 
-              <label class="field field--compact">
-                <span class="field__label">Show forks</span>
-                <input id="showForks" type="checkbox" />
-              </label>
             </div>
 
             <div class="toolbar__meta">
@@ -168,7 +163,7 @@
           <div class="section__header">
             <h2>Fitness & Nutrition</h2>
             <p class="muted">
-              Workout plans, meal-prep resources, and a simple meal planner that generates a grocery list.
+              Workout plans and nutrition resources (meal prep, automation notes, and more).
             </p>
           </div>
 
@@ -181,37 +176,11 @@
             <div class="panel">
               <h3 class="panel__title">Meal Planner</h3>
               <p class="muted small">
-                Pick meals, then copy the grocery list. Edit recipes in
-                <code>content/fitness/recipes.json</code>.
+                Placeholder space for my meal planner + grocery automation (coming soon).
               </p>
-
-              <div class="planner">
-                <div class="planner__row">
-                  <label class="field">
-                    <span class="field__label">Meal</span>
-                    <select id="recipePicker" class="field__control"></select>
-                  </label>
-                  <button class="btn btn--primary" id="addMeal" type="button">Add</button>
-                  <button class="btn btn--ghost" id="clearMeals" type="button">Clear</button>
-                </div>
-
-                <div class="planner__row planner__row--stack">
-                  <div>
-                    <h4 class="minihead">Selected meals</h4>
-                    <ul class="mini" id="selectedMeals"></ul>
-                  </div>
-                  <div>
-                    <h4 class="minihead">Grocery list</h4>
-                    <textarea
-                      id="groceryList"
-                      class="textarea"
-                      rows="10"
-                      spellcheck="false"
-                      readonly
-                    ></textarea>
-                  </div>
-                </div>
-              </div>
+              <p class="muted small">
+                When it’s ready, I’ll link it here (or embed it) and connect it to my cookbook-based meal plans.
+              </p>
             </div>
           </div>
         </div>
@@ -262,4 +231,3 @@
     </dialog>
   </body>
 </html>
-
