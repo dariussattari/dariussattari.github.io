@@ -1,15 +1,3 @@
 {
-  "items": [
-    {
-      "title": "Workout plan template",
-      "date": "May 11, 2026",
-      "path": "content/fitness/workout-plan.md"
-    },
-    {
-      "title": "Meal prep + grocery automation notes",
-      "date": "May 11, 2026",
-      "path": "content/fitness/meal-prep.md"
-    }
-  ]
+  "items": []
 }
-

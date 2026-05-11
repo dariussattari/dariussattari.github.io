@@ -16,7 +16,7 @@ Your site will be live at `https://username.github.io/`.
 - Edit `site.config.js`
 - Add AI posts in `content/ai/` and update `content/ai/index.json`
 - Add writing in `content/writing/` and update `content/writing/index.json`
-- Add fitness content in `content/fitness/` and recipes in `content/fitness/recipes.json`
+- Add fitness content in `content/fitness/` and update `content/fitness/index.json`
 
 ## Local preview
 

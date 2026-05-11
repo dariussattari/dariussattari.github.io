@@ -4,20 +4,22 @@ window.SITE_CONFIG = {
   role: "Engineer • Builder • Lifelong learner",
   tagline: "I build practical software, explore AI systems, and share what I learn.",
   githubUsername: "dariussattari",
-  email: "you@example.com",
+  emails: ["sattaridarius@gmail.com", "dariussattari@g.harvard.edu"],
 
   socials: [
     { label: "GitHub", href: "https://github.com/dariussattari" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/your-handle/" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/darius-sattari-33a50b204" },
   ],
 
   aiDiscussionsUrl: "",
 
   projectSettings: {
-    maxRepos: 80,
+    maxRepos: 0,
     includeArchived: false,
-    includeForks: false,
+    includeForks: true,
   },
+
+  excludeRepoNames: ["dariussattari.github.io"],
 
   projectSubjects: [
     {
@@ -67,4 +69,3 @@ window.SITE_CONFIG = {
     },
   ],
 };
-
