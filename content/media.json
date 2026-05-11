@@ -9,12 +9,6 @@
       "label": "Policy memo (PDF)",
       "href": "assets/files/policy-memo.pdf",
       "meta": ""
-    },
-    {
-      "label": "Podcast (add link)",
-      "href": "#contact",
-      "meta": "Edit content/media.json"
     }
   ]
 }
-

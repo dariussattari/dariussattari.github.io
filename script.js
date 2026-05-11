@@ -99,12 +99,13 @@
     const $contactLinks = el("contactLinks");
     if ($contactLinks) {
       const items = [];
-      if (config.email) {
-        items.push({
-          label: "Email",
-          href: `mailto:${config.email}`,
-          meta: config.email,
-        });
+      const emails = Array.isArray(config.emails)
+        ? config.emails.filter(Boolean)
+        : config.email
+          ? [config.email]
+          : [];
+      for (const email of emails) {
+        items.push({ label: email, href: `mailto:${email}`, meta: "Email" });
       }
       if (githubUrl) {
         items.push({ label: "GitHub", href: githubUrl, meta: `@${githubUsername}` });
@@ -338,10 +339,9 @@
 
   async function fetchAllRepos(username, maxRepos) {
     const perPage = 100;
-    const pages = Math.ceil(Math.min(maxRepos, 400) / perPage);
     const repos = [];
 
-    for (let page = 1; page <= pages; page++) {
+    for (let page = 1; ; page++) {
       const url = `https://api.github.com/users/${encodeURIComponent(
         username
       )}/repos?per_page=${perPage}&page=${page}&sort=updated`;
@@ -362,15 +362,16 @@
       const pageRepos = await res.json();
       repos.push(...pageRepos);
       if (pageRepos.length < perPage) break;
+      if (Number.isFinite(maxRepos) && maxRepos > 0 && repos.length >= maxRepos) break;
     }
 
+    if (Number.isFinite(maxRepos) && maxRepos > 0) return repos.slice(0, maxRepos);
     return repos;
   }
 
   function initProjects() {
     const subjectSelect = el("subjectFilter");
     const search = el("projectSearch");
-    const showForks = el("showForks");
     const grid = el("projectGrid");
     const meta = el("projectMeta");
 
@@ -382,7 +383,8 @@
     }
 
     const settings = config.projectSettings || {};
-    showForks.checked = Boolean(settings.includeForks);
+    const excludeRepoNames = Array.isArray(config.excludeRepoNames) ? config.excludeRepoNames : [];
+    const excludeSet = new Set(excludeRepoNames.map((n) => normalize(n)));
 
     let allRepos = [];
     let lastRenderedCount = 0;
@@ -395,11 +397,12 @@
     function applyFilters() {
       const q = normalize(search?.value || "");
       const subject = getSelectedSubject();
-      const includeForks = Boolean(showForks?.checked);
+      const includeForks = true;
 
       const filtered = allRepos
         .filter((r) => (includeForks ? true : !r.fork))
         .filter((r) => (settings.includeArchived ? true : !r.archived))
+        .filter((r) => (excludeSet.size ? !excludeSet.has(normalize(r.name)) : true))
         .filter((r) => subjectMatchesRepo(subject, r))
         .filter((r) => {
           if (!q) return true;
@@ -416,7 +419,9 @@
     async function load() {
       meta.textContent = "Loading projects from GitHub…";
       try {
-        allRepos = await fetchAllRepos(username, settings.maxRepos || 80);
+        const maxRepos =
+          Number.isFinite(settings.maxRepos) && settings.maxRepos >= 0 ? settings.maxRepos : 0;
+        allRepos = await fetchAllRepos(username, maxRepos);
         meta.textContent = `Loaded ${allRepos.length} repos.`;
         applyFilters();
       } catch (err) {
@@ -425,98 +430,12 @@
     }
 
     subjectSelect?.addEventListener("change", applyFilters);
-    showForks?.addEventListener("change", applyFilters);
     search?.addEventListener("input", () => {
       applyFilters();
       if (lastRenderedCount === 0) meta.textContent = "No matching repos.";
     });
 
     load();
-  }
-
-  async function initMealPlanner() {
-    const picker = el("recipePicker");
-    const addBtn = el("addMeal");
-    const clearBtn = el("clearMeals");
-    const selectedList = el("selectedMeals");
-    const groceryBox = el("groceryList");
-    if (!picker || !addBtn || !clearBtn || !selectedList || !groceryBox) return;
-
-    let recipes;
-    try {
-      recipes = await fetchJson("content/fitness/recipes.json");
-    } catch {
-      picker.replaceChildren(new Option("No recipes found", ""));
-      return;
-    }
-
-    const items = Array.isArray(recipes?.items) ? recipes.items : [];
-    picker.replaceChildren(...items.map((r) => new Option(r.name, r.id)));
-
-    const selected = [];
-
-    function computeGroceryList() {
-      const merged = new Map(); // name -> { unit, qty }
-      for (const id of selected) {
-        const recipe = items.find((r) => r.id === id);
-        if (!recipe) continue;
-        for (const ing of recipe.ingredients || []) {
-          const key = normalize(ing.name);
-          const prev = merged.get(key);
-          const qty = Number(ing.qty || 0);
-          if (!prev) {
-            merged.set(key, { name: ing.name, unit: ing.unit || "", qty });
-          } else {
-            merged.set(key, { ...prev, qty: prev.qty + qty });
-          }
-        }
-      }
-
-      const lines = Array.from(merged.values())
-        .sort((a, b) => a.name.localeCompare(b.name))
-        .map((x) => `${x.qty ? x.qty : ""} ${x.unit}`.trim() + (x.qty || x.unit ? " " : "") + x.name)
-        .map((s) => s.trim());
-
-      groceryBox.value = lines.join("\n");
-    }
-
-    function renderSelected() {
-      selectedList.replaceChildren(
-        ...selected.map((id) => {
-          const recipe = items.find((r) => r.id === id);
-          const li = document.createElement("li");
-          li.textContent = recipe?.name || id;
-          const btn = document.createElement("button");
-          btn.type = "button";
-          btn.textContent = "Remove";
-          btn.addEventListener("click", () => {
-            const idx = selected.indexOf(id);
-            if (idx >= 0) selected.splice(idx, 1);
-            renderSelected();
-            computeGroceryList();
-          });
-          li.appendChild(btn);
-          return li;
-        })
-      );
-    }
-
-    addBtn.addEventListener("click", () => {
-      const id = picker.value;
-      if (!id) return;
-      selected.push(id);
-      renderSelected();
-      computeGroceryList();
-    });
-
-    clearBtn.addEventListener("click", () => {
-      selected.splice(0, selected.length);
-      renderSelected();
-      computeGroceryList();
-    });
-
-    renderSelected();
-    computeGroceryList();
   }
 
   function initThemeToggle() {
@@ -551,9 +470,7 @@
     }
 
     initProjects();
-    initMealPlanner();
   }
 
   window.addEventListener("DOMContentLoaded", main);
 })();
-
