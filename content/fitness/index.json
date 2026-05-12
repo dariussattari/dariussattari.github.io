@@ -1,3 +1,19 @@
 {
-  "items": []
+  "items": [
+    {
+      "title": "12-week hybrid training program",
+      "date": "May 12, 2026",
+      "path": "content/fitness/12-week-hybrid-training-program.md"
+    },
+    {
+      "title": "Weekly meal plan automation (how it works)",
+      "date": "May 12, 2026",
+      "path": "content/fitness/weekly-meal-plan-automation.md"
+    },
+    {
+      "title": "Example: Week 1 meal plan (sanitized)",
+      "date": "May 12, 2026",
+      "path": "content/fitness/example-week-1-sanitized.md"
+    }
+  ]
 }
