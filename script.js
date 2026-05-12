@@ -219,9 +219,9 @@
   }
 
   async function initContent() {
-    const [$aiIndex, $writingIndex, $fitnessIndex, $mediaIndex] = await Promise.all([
+    const [$aiIndex, $researchIndex, $fitnessIndex, $mediaIndex] = await Promise.all([
       fetchJson("content/ai/index.json"),
-      fetchJson("content/writing/index.json"),
+      fetchJson("content/research/index.json"),
       fetchJson("content/fitness/index.json"),
       fetchJson("content/media.json"),
     ]);
@@ -231,10 +231,18 @@
       index: $aiIndex,
       emptyMessage: "Add Markdown posts to content/ai/.",
     });
+
+    const undergradIndex = { items: Array.isArray($researchIndex?.undergrad) ? $researchIndex.undergrad : [] };
+    const gradIndex = { items: Array.isArray($researchIndex?.grad) ? $researchIndex.grad : [] };
     renderPostList({
-      listEl: el("writingList"),
-      index: $writingIndex,
-      emptyMessage: "Add Markdown posts to content/writing/.",
+      listEl: el("undergradResearchList"),
+      index: undergradIndex,
+      emptyMessage: "Add items to content/research/index.json (undergrad).",
+    });
+    renderPostList({
+      listEl: el("gradResearchList"),
+      index: gradIndex,
+      emptyMessage: "Add items to content/research/index.json (grad).",
     });
     renderPostList({
       listEl: el("fitnessList"),

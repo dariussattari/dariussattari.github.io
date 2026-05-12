@@ -1,11 +1,6 @@
 {
   "items": [
     {
-      "label": "Resume (PDF)",
-      "href": "assets/files/resume.pdf",
-      "meta": ""
-    },
-    {
       "label": "Policy memo (PDF)",
       "href": "assets/files/policy-memo.pdf",
       "meta": ""
