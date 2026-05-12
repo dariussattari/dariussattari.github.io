@@ -120,14 +120,6 @@
       $contactLinks.replaceChildren(...items.map(toListItem));
     }
 
-    const $lastUpdated = el("lastUpdated");
-    if ($lastUpdated) {
-      $lastUpdated.textContent = `Last updated: ${new Date().toLocaleDateString(undefined, {
-        year: "numeric",
-        month: "short",
-        day: "2-digit",
-      })}`;
-    }
   }
 
   function toListItem(item) {
@@ -219,18 +211,11 @@
   }
 
   async function initContent() {
-    const [$aiIndex, $researchIndex, $fitnessIndex, $mediaIndex] = await Promise.all([
-      fetchJson("content/ai/index.json"),
+    const [$researchIndex, $fitnessIndex, $mediaIndex] = await Promise.all([
       fetchJson("content/research/index.json"),
       fetchJson("content/fitness/index.json"),
       fetchJson("content/media.json"),
     ]);
-
-    renderPostList({
-      listEl: el("aiPostList"),
-      index: $aiIndex,
-      emptyMessage: "Add Markdown posts to content/ai/.",
-    });
 
     const undergradIndex = { items: Array.isArray($researchIndex?.undergrad) ? $researchIndex.undergrad : [] };
     const gradIndex = { items: Array.isArray($researchIndex?.grad) ? $researchIndex.grad : [] };
@@ -254,22 +239,6 @@
     if (mediaList) {
       const items = Array.isArray($mediaIndex?.items) ? $mediaIndex.items : [];
       mediaList.replaceChildren(...items.map(toListItem));
-    }
-
-    const hint = el("aiDiscussionsHint");
-    if (hint) {
-      if (config.aiDiscussionsUrl) {
-        const a = document.createElement("a");
-        a.className = "link";
-        a.href = config.aiDiscussionsUrl;
-        a.target = "_blank";
-        a.rel = "noreferrer";
-        a.textContent = "Join the discussion on GitHub Discussions →";
-        hint.replaceChildren(a);
-      } else {
-        hint.textContent =
-          "Tip: set SITE_CONFIG.aiDiscussionsUrl in site.config.js to link your GitHub Discussions category.";
-      }
     }
   }
 
